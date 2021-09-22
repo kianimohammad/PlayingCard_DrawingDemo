@@ -13,6 +13,9 @@
 		1C11441326FA4F7C00FD0F01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C11441126FA4F7C00FD0F01 /* Main.storyboard */; };
 		1C11441526FA4F7E00FD0F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C11441426FA4F7E00FD0F01 /* Assets.xcassets */; };
 		1C11441826FA4F7E00FD0F01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C11441626FA4F7E00FD0F01 /* LaunchScreen.storyboard */; };
+		1C11442426FA540F00FD0F01 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C11442326FA540F00FD0F01 /* PlayingCardView.swift */; };
+		1C11442626FA54AF00FD0F01 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C11442526FA54AF00FD0F01 /* PlayingCard.swift */; };
+		1C11442826FA676F00FD0F01 /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C11442726FA676F00FD0F01 /* PlayingCardDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		1C11441426FA4F7E00FD0F01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C11441726FA4F7E00FD0F01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C11441926FA4F7E00FD0F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C11442326FA540F00FD0F01 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
+		1C11442526FA54AF00FD0F01 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
+		1C11442726FA676F00FD0F01 /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		1C11440A26FA4F7C00FD0F01 /* Playing Card */ = {
 			isa = PBXGroup;
 			children = (
-				1C11440B26FA4F7C00FD0F01 /* AppDelegate.swift */,
-				1C11440D26FA4F7C00FD0F01 /* SceneDelegate.swift */,
-				1C11440F26FA4F7C00FD0F01 /* ViewController.swift */,
-				1C11441126FA4F7C00FD0F01 /* Main.storyboard */,
+				1C11442226FA4FD200FD0F01 /* Model */,
+				1C11442026FA4FAD00FD0F01 /* Supporting Files */,
+				1C11442126FA4FC100FD0F01 /* Controller */,
+				1C11441F26FA4F9300FD0F01 /* View */,
 				1C11441426FA4F7E00FD0F01 /* Assets.xcassets */,
-				1C11441626FA4F7E00FD0F01 /* LaunchScreen.storyboard */,
 				1C11441926FA4F7E00FD0F01 /* Info.plist */,
 			);
 			path = "Playing Card";
+			sourceTree = "<group>";
+		};
+		1C11441F26FA4F9300FD0F01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1C11441126FA4F7C00FD0F01 /* Main.storyboard */,
+				1C11442326FA540F00FD0F01 /* PlayingCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1C11442026FA4FAD00FD0F01 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C11440B26FA4F7C00FD0F01 /* AppDelegate.swift */,
+				1C11440D26FA4F7C00FD0F01 /* SceneDelegate.swift */,
+				1C11441626FA4F7E00FD0F01 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1C11442126FA4FC100FD0F01 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1C11440F26FA4F7C00FD0F01 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1C11442226FA4FD200FD0F01 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1C11442526FA54AF00FD0F01 /* PlayingCard.swift */,
+				1C11442726FA676F00FD0F01 /* PlayingCardDeck.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C11442626FA54AF00FD0F01 /* PlayingCard.swift in Sources */,
 				1C11441026FA4F7C00FD0F01 /* ViewController.swift in Sources */,
+				1C11442426FA540F00FD0F01 /* PlayingCardView.swift in Sources */,
+				1C11442826FA676F00FD0F01 /* PlayingCardDeck.swift in Sources */,
 				1C11440C26FA4F7C00FD0F01 /* AppDelegate.swift in Sources */,
 				1C11440E26FA4F7C00FD0F01 /* SceneDelegate.swift in Sources */,
 			);
