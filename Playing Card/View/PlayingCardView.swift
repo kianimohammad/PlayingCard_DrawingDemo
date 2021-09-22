@@ -7,11 +7,16 @@
 
 import UIKit
 
+@IBDesignable
 class PlayingCardView: UIView {
 
-    var rank: Int = 8
-    var suit: String = "♥️"
-    var isFaceUp: Bool = true
+    @IBInspectable
+    var rank: Int = 12 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    @IBInspectable
+    var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    @IBInspectable
+    var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -24,8 +29,19 @@ class PlayingCardView: UIView {
         UIColor.white.setFill()
         roundedRect.fill()
         
-        // draw the pips
-        drawPips()
+        if isFaceUp {
+            if let faceCardImage = UIImage(named: rankString+suit, in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
+                faceCardImage.draw(in: bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+            } else {
+            // draw the pips
+                drawPips()
+            }
+        } else {
+            if let cardBackImage = UIImage(named: "back", in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
+                cardBackImage.draw(in: bounds.zoom(by: SizeRatio.backCardImageSizeToBoundsSize))
+            }
+        }
+        
     }
     
     private lazy var upperLeftCornerLabel: UILabel = createCornerLabel()
@@ -83,6 +99,19 @@ class PlayingCardView: UIView {
             return pipString
         }
         
+        func rotatePip(_ string: NSAttributedString, in rect: CGRect) {
+            let textSize = string.size()
+            if let context = UIGraphicsGetCurrentContext() {
+                context.saveGState()
+                // translating the origin of the drawing to the new drawing location and rotate the context
+                let point = CGPoint(x: rect.midX, y: rect.midY)
+                context.translateBy(x: point.x, y: point.y)
+                context.rotate(by: .pi)
+                string.draw(at: CGPoint(x: -textSize.width/2, y: -textSize.height/2))
+                context.restoreGState()
+            }
+        }
+        
         if pipsPerRowForRank.indices.contains(rank) {
             let pipsPerRow = pipsPerRowForRank[rank]
             var pipRect = bounds.insetBy(dx: cornerOffset / 2, dy: cornerOffset).insetBy(dx: cornerString.size().width, dy: cornerString.size().height / 4)
@@ -93,10 +122,10 @@ class PlayingCardView: UIView {
             for pip in pipsPerRow.indices {
                 switch pipsPerRow[pip] {
                 case 1:
-                    pipString.draw(in: pipRect)
+                    pip > pipsPerRow.count/2 ? rotatePip(pipString, in: pipRect) : pipString.draw(in: pipRect)
                 case 2:
-                    pipString.draw(in: pipRect.leftHalf)
-                    pipString.draw(in: pipRect.rightHalf)
+                    pip > pipsPerRow.count/2 ? rotatePip(pipString, in: pipRect.leftHalf) : pipString.draw(in: pipRect.leftHalf)
+                    pip > pipsPerRow.count/2 ? rotatePip(pipString, in: pipRect.rightHalf) : pipString.draw(in: pipRect.rightHalf)
                 default:
                     break
                 }
@@ -104,6 +133,8 @@ class PlayingCardView: UIView {
             }
         }
     }
+    
+    
 }
 
 extension PlayingCardView {
@@ -112,6 +143,7 @@ extension PlayingCardView {
         static let cornerRadiusToBoundsHeight: CGFloat = 0.06
         static let cornerOffsetToCornerRadius: CGFloat = 0.33
         static let faceCardImageSizeToBoundsSize:CGFloat = 0.75
+        static let backCardImageSizeToBoundsSize:CGFloat = 1.1
         
     }
     private var cornerRadius: CGFloat {
